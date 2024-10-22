@@ -1,111 +1,103 @@
 # Windows dev environment cleaner
 ## DevEnv Cleanup Tool
 
-Ferramenta segura e robusta para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows, com verificações aprimoradas e sistema de retry.
+Ferramenta segura para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows.
 
-## ⚡ Guia Rápido
+## 📌 Guia Rápido de Uso
 
-```plaintext
-1. Execute como Administrador
-2. Verifique compatibilidade com Windows 10/11
-3. Faça backup (opção 2)
-4. Execute limpeza (opção 3)
-5. Reinicie o sistema
-```
+1. Salve o arquivo como `dev_cleanup.bat`
+2. Execute como Administrador
+3. Siga as opções do menu:
+   - Faça backup (opção 2)
+   - Execute a limpeza (opção 3)
+4. Reinicie o computador após conclusão
 
-## 🛡️ Recursos de Segurança Aprimorados
+## ⚠️ Atenção! O Que Será Afetado
 
-### Verificações Automatizadas
-- Detecção precisa da versão do Windows
-- Sistema robusto de lock com informações detalhadas
-- Verificação aprimorada de processos em execução
-- Backup do registro antes de modificações
-- Sistema de retry com descrições detalhadas
+### Será Removido
+- Python (instalações de usuário)
+- Anaconda/Miniconda
+- VS Code
+- Ambientes virtuais Python
+- Configurações relacionadas
 
-### Proteções do Sistema
-- Verificação multinível de processos críticos
-- Backup do PATH com timestamp
-- Confirmação interativa para operações críticas
-- Log detalhado de todas as operações
-- Histórico de backups do PATH
+### Será Preservado
+- Python do sistema
+- Outros programas instalados
+- Arquivos do Windows
+- Configurações do sistema
 
-## 📋 Pré-requisitos
+## 📋 Requisitos
 
-- Windows 10 ou 11 (verificação automática)
+- Windows 10 ou 11
 - Privilégios de Administrador
-- 1GB de espaço livre mínimo
-- Processos Python/VS Code encerrados
+- Mínimo 1GB de espaço livre
+- Todos os programas Python/VS Code fechados
 
-## 🚀 Funcionalidades Aprimoradas
+## 💿 Instalação e Execução
 
-### Verificação de Processos
-- Lista detalhada de processos em execução
-- Opções flexíveis de tratamento:
-  - [S] Aguardar fechamento
-  - [C] Cancelar operação
-  - [N] Prosseguir assim mesmo
-
-### Sistema de Retry
-- Tentativas configuráveis (padrão: 3)
-- Delay entre tentativas ajustável
-- Mensagens descritivas para cada operação
-- Log detalhado de falhas
-
-### Gestão do PATH
-- Backup com timestamp
-- Histórico de modificações
-- Verificação de integridade
-- Restauração facilitada
-
-## 📊 Sistema de Logs Aprimorado
-
-### Informações Registradas
-- Timestamp preciso
-- Usuário executor
-- Versão do Windows
-- Processos detectados
-- Operações realizadas
-- Tentativas de retry
-- Modificações no PATH
-
-### Localização
+### Onde Salvar
 ```
-%USERPROFILE%\Desktop\dev_cleanup_[TIMESTAMP].log
+Locais Recomendados:
+C:\Scripts\dev_cleanup.bat
+ou
+%USERPROFILE%\Scripts\dev_cleanup.bat
+
+NÃO salvar em:
+C:\Windows\
+C:\Program Files\
+C:\Program Files (x86)\
 ```
 
-## 🔄 Processo de Desinstalação
+### Como Executar
+1. **Método Recomendado**:
+   - Clique direito no arquivo
+   - "Executar como administrador"
 
-### Python
-1. Backup do registro
-2. Lista versões instaladas
-3. Confirmação específica
-4. Desinstalação com retry
-5. Verificação pós-remoção
+2. **Via Command Prompt**:
+   ```batch
+   cd C:\Scripts
+   runas /user:Administrator "dev_cleanup.bat"
+   ```
 
-### VS Code
-1. Verificação de processos
-2. Backup de configurações
-3. Desinstalação silenciosa
-4. Retry em caso de falha
-5. Limpeza de resíduos
+3. **Via PowerShell**:
+   ```powershell
+   Start-Process "C:\Scripts\dev_cleanup.bat" -Verb RunAs
+   ```
 
-### Anaconda
-1. Detecção de ambientes
-2. Backup de configurações
-3. Desinstalação automática
-4. Verificação de PATH
-5. Limpeza de diretórios
+## 🛡️ Medidas de Segurança
 
-## ⚙️ Menu Aprimorado
+- Verificação de privilégios administrativos
+- Proteção contra execução simultânea
+- Verificação de espaço em disco
+- Backup automático antes de modificações
+- Proteção de diretórios do sistema
+- Sistema de retry para operações críticas
 
-```plaintext
+## 🔄 Como Usar
+
+### Antes de Executar
+1. Feche todos os programas:
+   - VS Code
+   - Python/IDEs Python
+   - Anaconda Navigator
+   - Jupyter Notebooks
+
+2. Verifique processos:
+   - Python (python.exe)
+   - VS Code (code.exe)
+   - Anaconda (conda.exe)
+
+3. Faça backup de:
+   - Projetos importantes
+   - Configurações personalizadas
+   - Requirements dos projetos
+
+### Opções do Menu
+```
 ====================================
 LIMPEZA DE AMBIENTE DE DESENVOLVIMENTO
 ====================================
-Data/Hora: [atual]
-Usuário: [logado]
-Log: [caminho]
-
 1. Analisar instalações existentes
 2. Backup das configurações
 3. Desinstalar tudo automaticamente
@@ -116,76 +108,70 @@ Log: [caminho]
 8. Sair
 ```
 
-## 🔍 Verificações de Segurança
+## 📊 Logs e Backup
 
-### Antes da Execução
-- Versão do Windows compatível
-- Espaço em disco suficiente
-- Privilégios adequados
-- Lock file disponível
-
-### Durante a Execução
-- Monitoramento de processos
-- Verificação de path protegidos
-- Validação de operações críticas
-- Sistema de retry em falhas
-
-### Pós-Execução
-- Verificação de remoção
-- Validação do PATH
-- Integridade do sistema
-- Logs completos
-
-## 🆘 Tratamento de Erros
-
-### Retry Automatizado
-- Tentativas configuráveis
-- Delay entre tentativas
-- Descrição detalhada
-- Log de falhas
-
-### Recuperação
-- Backups com timestamp
-- Histórico do PATH
-- Registro de operações
-- Scripts de restauração
-
-## 📝 Logs e Relatórios
-
-### Conteúdo
-- Operações realizadas
-- Erros encontrados
-- Tentativas de retry
-- Modificações no sistema
-- Backups criados
-
-### Formato
-- Timestamp preciso
-- Descrições detalhadas
-- Status de operações
-- Caminhos afetados
-
-## 🔐 Recomendações de Uso
-
-1. Sempre execute como Administrador
-2. Verifique processos em execução
-3. Faça backup antes de iniciar
-4. Mantenha logs para referência
-5. Reinicie após conclusão
-
-## 🛠️ Configurações Avançadas
-
-Ajuste no início do script:
-```batch
-set "MAX_RETRIES=3"
-set "RETRY_DELAY=5"
-set "MIN_DISK_SPACE=1073741824"
+### Localização
 ```
+Logs:
+%USERPROFILE%\Desktop\dev_cleanup_[DATA]_[HORA].log
+
+Backup:
+%USERPROFILE%\Desktop\dev_backup_[DATA]_[HORA]\
+```
+
+### Conteúdo do Backup
+- Configurações VS Code
+- Lista de extensões
+- Ambientes virtuais
+- PATH original
+- Chaves de registro
+
+## ❌ Solução de Problemas
+
+### Erros Comuns
+
+1. **"Acesso Negado"**
+   - Execute como Administrador
+   - Verifique permissões
+   - Mova para diretório não protegido
+
+2. **"Processos em Uso"**
+   - Feche todos os programas relacionados
+   - Use Task Manager para verificar
+   - Reinicie se necessário
+
+3. **"Falha na Desinstalação"**
+   - Verifique o log
+   - Use opção de limpeza manual
+   - Reinicie e tente novamente
+
+## 🔍 Verificação Pós-Limpeza
+
+1. **Verifique Remoções**:
+   ```batch
+   where python
+   where code
+   where conda
+   ```
+
+2. **Verifique PATH**:
+   ```batch
+   echo %PATH%
+   ```
+
+3. **Verifique Diretórios**:
+   - AppData\Local\Programs\Python
+   - Anaconda3
+   - AppData\Local\Programs\Microsoft VS Code
+
+## 📝 Notas Importantes
+
+- Sempre execute como Administrador
+- Faça backup antes de começar
+- Não interrompa o processo
+- Reinicie após conclusão
+- Mantenha os logs para referência
 
 ## 📄 Licença
 
-MIT License - Veja LICENSE para detalhes
-
----
-
-**Nota**: Esta versão inclui melhorias significativas no tratamento de erros, verificação de processos e sistema de backup. Sempre verifique o log para detalhes completos das operações realizadas.
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.

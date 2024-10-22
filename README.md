@@ -1,4 +1,4 @@
-# DevEnv Cleanup Tool
+# Windows dev environment cleaner
 
 🧹 Uma ferramenta poderosa para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows
 

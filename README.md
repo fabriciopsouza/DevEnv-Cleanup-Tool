@@ -152,5 +152,3 @@ O script foi testado para garantir:
 - Preserva instalações críticas
 - Mantém integridade do Windows
 - Protege contra falhas de execução
-
-Quer que eu transcreva também o código atualizado com todas estas proteções?

@@ -1,99 +1,156 @@
 # Windows dev environment cleaner
+## DevEnv Cleanup Tool
 
-🧹 Uma ferramenta poderosa para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows
+🧹 Uma ferramenta segura e robusta para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows
 
-## Sobre
+## ⚠️ Medidas de Segurança
 
-DevEnv Cleanup Tool é um script batch avançado para Windows que automatiza a limpeza completa de ambientes de desenvolvimento Python, incluindo múltiplas instalações Python, Anaconda, e VS Code. Ideal para desenvolvedores que precisam "resetar" seus ambientes de desenvolvimento ou remover instalações conflitantes.
+Esta ferramenta foi desenvolvida com múltiplas camadas de proteção para garantir que apenas os componentes alvo sejam afetados:
 
-## ✨ Características
+- ✅ Proteção contra remoção de diretórios do sistema
+- ✅ Verificação de processos críticos em execução
+- ✅ Backup automático antes de qualquer modificação
+- ✅ Preservação de caminhos essenciais do PATH
+- ✅ Log detalhado de todas as operações
+- ✅ Verificação de espaço em disco
+- ✅ Proteção contra execuções simultâneas
+- ✅ Verificação de privilégios administrativos
 
-- 🔍 Análise detalhada de instalações existentes
-- 💾 Backup automático de configurações e extensões
-- 🗑️ Desinstalação automática com verificação
-- 🧹 Limpeza profunda de registros e diretórios
-- 📝 Log detalhado de todas as operações
-- ⚡ Execução silenciosa disponível
-- 🛡️ Verificações de segurança
+### 🛡️ O que o script NÃO faz:
+
+- ❌ Não modifica instalações do sistema Windows
+- ❌ Não remove Python instalado em C:\Program Files
+- ❌ Não altera registros críticos do sistema
+- ❌ Não modifica PATH do sistema Windows
+- ❌ Não afeta outros programas instalados
+
+## 🎯 Componentes Gerenciados
+
+O script remove APENAS:
+- Python (instalações de usuário)
+- Anaconda/Miniconda
+- VS Code
+- Ambientes virtuais Python
+- Configurações relacionadas
 
 ## 📋 Pré-requisitos
 
 - Windows 10/11
 - Privilégios de Administrador
-- Conhecimento básico sobre os componentes a serem removidos
+- Mínimo 1GB de espaço livre
+- Nenhum processo Python/VS Code em execução
 
-## 🚀 Uso
+## 🚀 Uso Seguro
 
-1. Baixe o script `cleanup.bat`
-2. Execute como Administrador
-3. Siga o menu interativo
+1. **Preparação**:
+   - Feche todos os programas Python/VS Code
+   - Salve seu trabalho em editores de texto
+   - Feche IDEs em execução
 
-```batch
-Opções disponíveis:
-1. Analisar instalações existentes
-2. Backup das configurações
-3. Desinstalar tudo automaticamente
-4. Limpar registros e pastas manualmente
-5. Verificar instalações do sistema
-6. Sair
-```
+2. **Execução**:
+   ```bash
+   # Execute como Administrador
+   cleanup.bat
+   ```
 
-## ⚙️ Componentes Gerenciados
+3. **Opções Disponíveis**:
+   1. Analisar instalações existentes
+   2. Backup das configurações
+   3. Desinstalar tudo automaticamente
+   4. Limpar registros e pastas manualmente
+   5. Verificar instalações do sistema
+   6. Limpar variáveis PATH
+   7. Sair
 
-- Python (todas as versões)
-- Anaconda/Miniconda
-- VS Code
-- Ambientes virtuais
-- Pacotes pip
-- Extensões VS Code
-- Registros do Windows
-- Variáveis de ambiente
+## 📊 Sistema de Logs
 
-## 📊 Logs
-
-O script gera logs detalhados em:
+O script mantém logs detalhados de todas as operações:
 ```
 %USERPROFILE%\Desktop\dev_cleanup_[DATA]_[HORA].log
 ```
 
-## 🔒 Segurança
+### 📝 Informações Registradas:
+- Timestamp de cada operação
+- Componentes encontrados
+- Tentativas de desinstalação
+- Erros e avisos
+- Modificações no PATH
+- Backups realizados
 
-- Verificação de privilégios administrativos
-- Confirmação antes de operações destrutivas
-- Backup automático de configurações
-- Verificações de erro em cada operação
+## 💾 Sistema de Backup
 
-## 🤝 Contribuindo
+Antes de qualquer modificação, o script cria backups em:
+```
+%USERPROFILE%\Desktop\dev_backup_[DATA]_[HORA]\
+```
 
-Contribuições são bem-vindas! Por favor, leia nosso guia de contribuição antes de submeter um PR.
+### 🗃️ Itens Incluídos no Backup:
+- Configurações VS Code
+- Lista de extensões
+- Ambientes virtuais
+- Pacotes pip instalados
+- Ambientes Conda
+- PATH original
+- Chaves de registro relevantes
 
-### Como contribuir:
+## ⚡ Recursos de Segurança
 
-1. Faça um Fork do projeto
-2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a Branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+### Verificação de Processos
+- Impede remoção se processos críticos estiverem rodando
+- Lista processos que precisam ser fechados
+- Permite ao usuário fechar processos manualmente
 
-## 📝 TODO
+### Proteção de Diretórios
+- Lista de diretórios protegidos que não podem ser modificados
+- Verificação antes de cada operação de remoção
+- Preservação de caminhos do sistema
 
-- [ ] Adicionar suporte para mais IDEs
-- [ ] Interface gráfica opcional
-- [ ] Restauração de backup
-- [ ] Modo silencioso via parâmetros
-- [ ] Suporte para Visual Studio
-- [ ] Relatório em HTML
+### Gerenciamento do PATH
+- Preserva caminhos essenciais do sistema
+- Backup do PATH original
+- Validação antes de aplicar modificações
+
+## 🔄 Recuperação
+
+Em caso de problemas:
+1. Acesse a pasta de backup
+2. Use os arquivos de backup para restaurar configurações
+3. Reinstale componentes necessários
+4. Restaure PATH se necessário
+
+## ⚠️ Avisos Importantes
+
+1. **Sempre faça backup** antes de executar
+2. Execute **somente como Administrador**
+3. Feche todos os programas relacionados
+4. Tenha **espaço em disco** suficiente
+5. Reinicie após a conclusão
+
+## 🐛 Solução de Problemas
+
+Se encontrar problemas:
+1. Verifique os logs detalhados
+2. Confirme que não há processos bloqueando
+3. Verifique permissões de administrador
+4. Garanta espaço em disco suficiente
 
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
-## 👥 Autores
+## 🤝 Contribuindo
 
-* **Seu Nome** - *Trabalho inicial*
+1. Faça um Fork
+2. Crie sua Feature Branch
+3. Teste exaustivamente
+4. Envie um Pull Request
 
-## 🙏 Agradecimentos
+## 🔍 Validação de Segurança
 
-* Comunidade Python Brasil
-* Stack Overflow
-* Microsoft Docs
+O script foi testado para garantir:
+- Não afeta componentes do sistema
+- Preserva instalações críticas
+- Mantém integridade do Windows
+- Protege contra falhas de execução
+
+Quer que eu transcreva também o código atualizado com todas estas proteções?

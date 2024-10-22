@@ -1,154 +1,191 @@
 # Windows dev environment cleaner
 ## DevEnv Cleanup Tool
 
-🧹 Uma ferramenta segura e robusta para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows
+Ferramenta segura e robusta para limpeza completa de ambientes de desenvolvimento Python/VS Code no Windows, com verificações aprimoradas e sistema de retry.
 
-## ⚠️ Medidas de Segurança
+## ⚡ Guia Rápido
 
-Esta ferramenta foi desenvolvida com múltiplas camadas de proteção para garantir que apenas os componentes alvo sejam afetados:
+```plaintext
+1. Execute como Administrador
+2. Verifique compatibilidade com Windows 10/11
+3. Faça backup (opção 2)
+4. Execute limpeza (opção 3)
+5. Reinicie o sistema
+```
 
-- ✅ Proteção contra remoção de diretórios do sistema
-- ✅ Verificação de processos críticos em execução
-- ✅ Backup automático antes de qualquer modificação
-- ✅ Preservação de caminhos essenciais do PATH
-- ✅ Log detalhado de todas as operações
-- ✅ Verificação de espaço em disco
-- ✅ Proteção contra execuções simultâneas
-- ✅ Verificação de privilégios administrativos
+## 🛡️ Recursos de Segurança Aprimorados
 
-### 🛡️ O que o script NÃO faz:
+### Verificações Automatizadas
+- Detecção precisa da versão do Windows
+- Sistema robusto de lock com informações detalhadas
+- Verificação aprimorada de processos em execução
+- Backup do registro antes de modificações
+- Sistema de retry com descrições detalhadas
 
-- ❌ Não modifica instalações do sistema Windows
-- ❌ Não remove Python instalado em C:\Program Files
-- ❌ Não altera registros críticos do sistema
-- ❌ Não modifica PATH do sistema Windows
-- ❌ Não afeta outros programas instalados
-
-## 🎯 Componentes Gerenciados
-
-O script remove APENAS:
-- Python (instalações de usuário)
-- Anaconda/Miniconda
-- VS Code
-- Ambientes virtuais Python
-- Configurações relacionadas
+### Proteções do Sistema
+- Verificação multinível de processos críticos
+- Backup do PATH com timestamp
+- Confirmação interativa para operações críticas
+- Log detalhado de todas as operações
+- Histórico de backups do PATH
 
 ## 📋 Pré-requisitos
 
-- Windows 10/11
+- Windows 10 ou 11 (verificação automática)
 - Privilégios de Administrador
-- Mínimo 1GB de espaço livre
-- Nenhum processo Python/VS Code em execução
+- 1GB de espaço livre mínimo
+- Processos Python/VS Code encerrados
 
-## 🚀 Uso Seguro
-
-1. **Preparação**:
-   - Feche todos os programas Python/VS Code
-   - Salve seu trabalho em editores de texto
-   - Feche IDEs em execução
-
-2. **Execução**:
-   ```bash
-   # Execute como Administrador
-   cleanup.bat
-   ```
-
-3. **Opções Disponíveis**:
-   1. Analisar instalações existentes
-   2. Backup das configurações
-   3. Desinstalar tudo automaticamente
-   4. Limpar registros e pastas manualmente
-   5. Verificar instalações do sistema
-   6. Limpar variáveis PATH
-   7. Sair
-
-## 📊 Sistema de Logs
-
-O script mantém logs detalhados de todas as operações:
-```
-%USERPROFILE%\Desktop\dev_cleanup_[DATA]_[HORA].log
-```
-
-### 📝 Informações Registradas:
-- Timestamp de cada operação
-- Componentes encontrados
-- Tentativas de desinstalação
-- Erros e avisos
-- Modificações no PATH
-- Backups realizados
-
-## 💾 Sistema de Backup
-
-Antes de qualquer modificação, o script cria backups em:
-```
-%USERPROFILE%\Desktop\dev_backup_[DATA]_[HORA]\
-```
-
-### 🗃️ Itens Incluídos no Backup:
-- Configurações VS Code
-- Lista de extensões
-- Ambientes virtuais
-- Pacotes pip instalados
-- Ambientes Conda
-- PATH original
-- Chaves de registro relevantes
-
-## ⚡ Recursos de Segurança
+## 🚀 Funcionalidades Aprimoradas
 
 ### Verificação de Processos
-- Impede remoção se processos críticos estiverem rodando
-- Lista processos que precisam ser fechados
-- Permite ao usuário fechar processos manualmente
+- Lista detalhada de processos em execução
+- Opções flexíveis de tratamento:
+  - [S] Aguardar fechamento
+  - [C] Cancelar operação
+  - [N] Prosseguir assim mesmo
 
-### Proteção de Diretórios
-- Lista de diretórios protegidos que não podem ser modificados
-- Verificação antes de cada operação de remoção
-- Preservação de caminhos do sistema
+### Sistema de Retry
+- Tentativas configuráveis (padrão: 3)
+- Delay entre tentativas ajustável
+- Mensagens descritivas para cada operação
+- Log detalhado de falhas
 
-### Gerenciamento do PATH
-- Preserva caminhos essenciais do sistema
-- Backup do PATH original
-- Validação antes de aplicar modificações
+### Gestão do PATH
+- Backup com timestamp
+- Histórico de modificações
+- Verificação de integridade
+- Restauração facilitada
 
-## 🔄 Recuperação
+## 📊 Sistema de Logs Aprimorado
 
-Em caso de problemas:
-1. Acesse a pasta de backup
-2. Use os arquivos de backup para restaurar configurações
-3. Reinstale componentes necessários
-4. Restaure PATH se necessário
+### Informações Registradas
+- Timestamp preciso
+- Usuário executor
+- Versão do Windows
+- Processos detectados
+- Operações realizadas
+- Tentativas de retry
+- Modificações no PATH
 
-## ⚠️ Avisos Importantes
+### Localização
+```
+%USERPROFILE%\Desktop\dev_cleanup_[TIMESTAMP].log
+```
 
-1. **Sempre faça backup** antes de executar
-2. Execute **somente como Administrador**
-3. Feche todos os programas relacionados
-4. Tenha **espaço em disco** suficiente
-5. Reinicie após a conclusão
+## 🔄 Processo de Desinstalação
 
-## 🐛 Solução de Problemas
+### Python
+1. Backup do registro
+2. Lista versões instaladas
+3. Confirmação específica
+4. Desinstalação com retry
+5. Verificação pós-remoção
 
-Se encontrar problemas:
-1. Verifique os logs detalhados
-2. Confirme que não há processos bloqueando
-3. Verifique permissões de administrador
-4. Garanta espaço em disco suficiente
+### VS Code
+1. Verificação de processos
+2. Backup de configurações
+3. Desinstalação silenciosa
+4. Retry em caso de falha
+5. Limpeza de resíduos
+
+### Anaconda
+1. Detecção de ambientes
+2. Backup de configurações
+3. Desinstalação automática
+4. Verificação de PATH
+5. Limpeza de diretórios
+
+## ⚙️ Menu Aprimorado
+
+```plaintext
+====================================
+LIMPEZA DE AMBIENTE DE DESENVOLVIMENTO
+====================================
+Data/Hora: [atual]
+Usuário: [logado]
+Log: [caminho]
+
+1. Analisar instalações existentes
+2. Backup das configurações
+3. Desinstalar tudo automaticamente
+4. Limpar registros e pastas manualmente
+5. Verificar instalações do sistema
+6. Limpar variáveis PATH
+7. Verificar processos em execução
+8. Sair
+```
+
+## 🔍 Verificações de Segurança
+
+### Antes da Execução
+- Versão do Windows compatível
+- Espaço em disco suficiente
+- Privilégios adequados
+- Lock file disponível
+
+### Durante a Execução
+- Monitoramento de processos
+- Verificação de path protegidos
+- Validação de operações críticas
+- Sistema de retry em falhas
+
+### Pós-Execução
+- Verificação de remoção
+- Validação do PATH
+- Integridade do sistema
+- Logs completos
+
+## 🆘 Tratamento de Erros
+
+### Retry Automatizado
+- Tentativas configuráveis
+- Delay entre tentativas
+- Descrição detalhada
+- Log de falhas
+
+### Recuperação
+- Backups com timestamp
+- Histórico do PATH
+- Registro de operações
+- Scripts de restauração
+
+## 📝 Logs e Relatórios
+
+### Conteúdo
+- Operações realizadas
+- Erros encontrados
+- Tentativas de retry
+- Modificações no sistema
+- Backups criados
+
+### Formato
+- Timestamp preciso
+- Descrições detalhadas
+- Status de operações
+- Caminhos afetados
+
+## 🔐 Recomendações de Uso
+
+1. Sempre execute como Administrador
+2. Verifique processos em execução
+3. Faça backup antes de iniciar
+4. Mantenha logs para referência
+5. Reinicie após conclusão
+
+## 🛠️ Configurações Avançadas
+
+Ajuste no início do script:
+```batch
+set "MAX_RETRIES=3"
+set "RETRY_DELAY=5"
+set "MIN_DISK_SPACE=1073741824"
+```
 
 ## 📄 Licença
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+MIT License - Veja LICENSE para detalhes
 
-## 🤝 Contribuindo
+---
 
-1. Faça um Fork
-2. Crie sua Feature Branch
-3. Teste exaustivamente
-4. Envie um Pull Request
-
-## 🔍 Validação de Segurança
-
-O script foi testado para garantir:
-- Não afeta componentes do sistema
-- Preserva instalações críticas
-- Mantém integridade do Windows
-- Protege contra falhas de execução
+**Nota**: Esta versão inclui melhorias significativas no tratamento de erros, verificação de processos e sistema de backup. Sempre verifique o log para detalhes completos das operações realizadas.
